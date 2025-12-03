@@ -10,8 +10,7 @@ function showCurrentDate() {
     const formatted = dayName + ", " + monthName + " " + day + ", " + year;
     document.getElementById("current-date").textContent = formatted;
   }
-  
-  // Set min and max dates for DOB field
+
   function setDateLimits() {
     const today = new Date();
     const maxDate = today.toISOString().split('T')[0];
@@ -27,12 +26,11 @@ function showCurrentDate() {
     }
   }
   
-  // Format phone number as (XXX)-XXX-XXXX
+
   function formatPhoneNumber(value) {
-    // Remove all non-digit characters
+
     const numbers = value.replace(/\D/g, '');
-    
-    // Format based on length
+
     if (numbers.length === 0) {
       return '';
     } else if (numbers.length <= 3) {
@@ -43,13 +41,11 @@ function showCurrentDate() {
       return '(' + numbers.slice(0, 3) + ')-' + numbers.slice(3, 6) + '-' + numbers.slice(6, 10);
     }
   }
-  
-  // Format SSN as ***-**-**** with hidden digits
+
   function formatSSN(value) {
-    // Remove all non-digit characters
+
     const numbers = value.replace(/\D/g, '');
-    
-    // Format based on length of actual numbers entered
+
     if (numbers.length === 0) {
       return '';
     } else if (numbers.length <= 3) {
@@ -62,24 +58,19 @@ function showCurrentDate() {
       return '***-**-****';
     }
   }
-  
-  // Format ZIP code as XXXXX or XXXXX-XXXX
+
   function formatZipCode(value) {
-    // Remove all non-digit characters
     const numbers = value.replace(/\D/g, '');
-    
-    // Format based on length
+
     if (numbers.length === 0) {
       return '';
     } else if (numbers.length <= 5) {
       return numbers;
     } else {
-      // Automatically add dash after 5th digit
       return numbers.slice(0, 5) + '-' + numbers.slice(5, 9);
     }
   }
   
-  // Setup phone number auto-formatting
   function setupPhoneFormatting() {
     const phoneField = document.getElementById("phone");
     if (phoneField) {
@@ -89,8 +80,7 @@ function showCurrentDate() {
         const oldValue = this.value;
         
         this.value = formatPhoneNumber(this.value);
-        
-        // Adjust cursor position
+
         if (oldValue !== this.value) {
           const newLength = this.value.length;
           let newCursorPos = cursorPosition + (newLength - oldLength);
@@ -99,28 +89,24 @@ function showCurrentDate() {
       });
     }
   }
-  
-  // Setup SSN auto-formatting with hidden digits (displays as XXX-XX-XXXX)
   function setupSSNFormatting() {
     const ssnField = document.getElementById("ssn");
     if (ssnField) {
-      let actualSSN = ''; // Store the actual SSN value
+      let actualSSN = ''; 
       
       ssnField.addEventListener("input", function(e) {
-        const inputValue = e.data; // Get the character that was just typed
-        
-        // If user is deleting
+        const inputValue = e.data; 
+
         if (e.inputType === 'deleteContentBackward') {
           actualSSN = actualSSN.slice(0, -1);
         } 
-        // If user is typing a digit
+
         else if (inputValue && /\d/.test(inputValue)) {
-          // Only add if we haven't reached max length (9 digits)
           if (actualSSN.length < 9) {
             actualSSN += inputValue;
           }
         }
-        // Handle paste event
+
         else if (e.inputType === 'insertFromPaste') {
           const pastedText = this.value.replace(/\D/g, '');
           actualSSN = pastedText.slice(0, 9);
@@ -653,4 +639,5 @@ function showCurrentDate() {
     }
 
   });
+
 
