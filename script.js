@@ -1,11 +1,4 @@
-/*
-Program name: script.js
-Author: Your Name Here
-Date created: 10/20/2025
-Date last edited: 10/20/2025
-Version: 2.3
-Description: External JavaScript for Patient Registration Form - Homework 2
-*/
+
 
 // Display current date on page load
 function showCurrentDate() {
@@ -660,4 +653,5 @@ function showCurrentDate() {
     if (form) {
       form.addEventListener("submit", validateFormOnSubmit);
     }
+
   });
